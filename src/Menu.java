@@ -30,7 +30,6 @@ public class Menu extends JFrame {
 	private int position = 0;
 	private Customer customer, e;
 	private CustomerAccount acc;
-
 	private JFrame f, f1;
 	private JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel;
 	private JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField,
@@ -39,11 +38,7 @@ public class Menu extends JFrame {
 	private JPanel panel, panel2;
 	private JButton add;
 	private JComboBox<String> box;
-
-	public static void main(String[] args) {
-		Menu driver = new Menu();
-		driver.menuStart();
-	}
+	private NewCustomer newCustomer = new NewCustomer();
 
 	public void menuStart() {
 
@@ -80,7 +75,7 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				String user = userType.getSelection().getActionCommand();
 				if (user.equals("New Customer")) {
-					newCustomer();
+					newCustomer.newCust();
 				} else if (user.equals("Administrator")) {
 					administrator();
 				} else if (user.equals("Customer")) {
@@ -275,90 +270,6 @@ public class Menu extends JFrame {
 		return true;
 	}
 
-	public void newCustomer() {
-
-		f.dispose();
-		f1 = new JFrame("Create New Customer");
-		f1.setSize(400, 300);
-		f1.setLocation(200, 200);
-		exit();
-		Container content = f1.getContentPane();
-		content.setLayout(new BorderLayout());
-
-		firstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
-		surnameLabel = new JLabel("Surname:", SwingConstants.RIGHT);
-		pPPSLabel = new JLabel("PPS Number:", SwingConstants.RIGHT);
-		dOBLabel = new JLabel("Date of birth", SwingConstants.RIGHT);
-		firstNameTextField = new JTextField(20);
-		surnameTextField = new JTextField(20);
-		pPSTextField = new JTextField(20);
-		dOBTextField = new JTextField(20);
-
-		panel = new JPanel(new GridLayout(6, 2));
-		panel.add(firstNameLabel);
-		panel.add(firstNameTextField);
-		panel.add(surnameLabel);
-		panel.add(surnameTextField);
-		panel.add(pPPSLabel);
-		panel.add(pPSTextField);
-		panel.add(dOBLabel);
-		panel.add(dOBTextField);
-
-		panel2 = new JPanel();
-		add = new JButton("Add");
-
-		add.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addDetails();
-			}
-		});
-		JButton cancel = new JButton("Cancel");
-		cancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				returnButton();
-			}
-		});
-
-		panel2.add(add);
-		panel2.add(cancel);
-
-		content.add(panel, BorderLayout.CENTER);
-		content.add(panel2, BorderLayout.SOUTH);
-
-		f1.setVisible(true);
-
-	}
-
-	public void addDetails() {
-		PPS = pPSTextField.getText();
-		firstName = firstNameTextField.getText();
-		surname = surnameTextField.getText();
-		DOB = dOBTextField.getText();
-
-		CustomerID = "ID" + PPS;
-
-		f1.dispose();
-		boolean loop = true;
-		while (loop) {
-			String password = JOptionPane.showInputDialog(f, "Enter 7 character Password;");
-
-			if (password.length() != 7) {
-				JOptionPane.showMessageDialog(null, null, "Password must be 7 charatcers long", JOptionPane.OK_OPTION);
-			} else {
-				ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount>();
-				Customer customer = new Customer(PPS, surname, firstName, DOB, CustomerID, password, accounts);
-				System.out.println(customer.toString());
-				customerList.add(customer);
-				JOptionPane.showMessageDialog(f, "CustomerID = " + CustomerID + "\n Password = " + password,
-						"Customer created.", JOptionPane.INFORMATION_MESSAGE);
-				loop = false;
-			}
-		}
-
-		menuStart();
-
-	}
-
 	public void administrator() {
 
 		boolean loop = true, loop2 = true;
@@ -432,8 +343,7 @@ public class Menu extends JFrame {
 			if (found == false) {
 				int reply = JOptionPane.showConfirmDialog(null, null, "Details are incorrect. Try again?",
 						JOptionPane.YES_NO_OPTION);
-				if (reply == JOptionPane.YES_OPTION) {
-				} else if (reply == JOptionPane.NO_OPTION) {
+				if (reply == JOptionPane.NO_OPTION) {
 					f.dispose();
 					loop = false;
 					menuStart();
@@ -1357,37 +1267,30 @@ public class Menu extends JFrame {
 
 	public void withdraw() {
 
+		Date date = new Date();
 		boolean loop = true;
 		boolean on = true;
 		double withdraw = 0;
 		checkAccount(loop, on);
 
-		if (on == true) {
+		if (on) {
 			String balanceTest = JOptionPane.showInputDialog(f, "Enter amount you wish to withdraw (max 500):");
 			if (isNumeric(balanceTest)) {
-
 				withdraw = Double.parseDouble(balanceTest);
 				loop = false;
 
 			} else {
-				JOptionPane.showMessageDialog(f, "You must enter a numerical value!", "Oops!",
+				JOptionPane.showMessageDialog(f, "You must enter a numerical value!", "!",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
-			if (withdraw > 500) {
-				JOptionPane.showMessageDialog(f, "500 is the maximum you can withdraw at a time.", "Oops!",
-						JOptionPane.INFORMATION_MESSAGE);
+			if (withdraw > 500 || withdraw > acc.getBalance()) {
+				JOptionPane.showMessageDialog(f, "500 is the maximum you can withdraw at a time or check your balance",
+						"Oops!", JOptionPane.INFORMATION_MESSAGE);
 				withdraw = 0;
 			}
-			if (withdraw > acc.getBalance()) {
-				JOptionPane.showMessageDialog(f, "Insufficient funds.", "Oops!", JOptionPane.INFORMATION_MESSAGE);
-				withdraw = 0;
-			}
-
 			String euro = "\u20ac";
 			acc.setBalance(acc.getBalance() - withdraw);
-			Date date = new Date();
 			String date2 = date.toString();
-
 			String type = "Withdraw";
 			double amount = withdraw;
 
@@ -1418,23 +1321,19 @@ public class Menu extends JFrame {
 					loop = false;
 					on = false;
 				}
-
-				String Pin = JOptionPane.showInputDialog(f, "Enter 4 digit PIN;");
+				String pin = JOptionPane.showInputDialog(f, "Enter 4 digit PIN;");
 				try {
-					int i = Integer.parseInt(Pin);
-
+					int pin2 = Integer.parseInt(pin);
 					if (on) {
-						if (checkPin == i) {
+						if (checkPin == pin2) {
 							loop = false;
 							JOptionPane.showMessageDialog(f, "Pin entry successful", "Pin",
 									JOptionPane.INFORMATION_MESSAGE);
-
 						} else {
 							count--;
 							JOptionPane.showMessageDialog(f, "Incorrect pin. " + count + " attempts remaining.", "Pin",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
-
 					}
 				} catch (Exception e) {
 					System.out.println(e);
