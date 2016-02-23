@@ -1,23 +1,32 @@
-import java.awt.*;
-
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
-import javax.swing.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import javax.swing.text.MaskFormatter;
-import java.util.ArrayList;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Menu extends JFrame {
 
 	private ArrayList<Customer> customerList = new ArrayList<Customer>();
-	private String PPS, firstName, surname, DOB, CustomerID, password;
+	private String PPS, firstName, surname, DOB, CustomerID;
 	private int position = 0;
 	private Customer customer, e;
 	private CustomerAccount acc;
@@ -30,7 +39,6 @@ public class Menu extends JFrame {
 	private JPanel panel, panel2;
 	private JButton add;
 	private JComboBox<String> box;
-	
 
 	public static void main(String[] args) {
 		Menu driver = new Menu();
@@ -237,8 +245,6 @@ public class Menu extends JFrame {
 				box.addItem(e1.getAccounts().get(i).getNumber());
 			}
 
-		
-
 			boxPanel.add(box);
 			content = f.getContentPane();
 			content.setLayout(new GridLayout(3, 1));
@@ -407,56 +413,36 @@ public class Menu extends JFrame {
 
 	public void existingCustomer() {
 
-		boolean loop = true, loop2 = true;
+		boolean loop = true;
 		boolean cont = false;
 		boolean found = false;
 		Customer customer = null;
+
 		while (loop) {
 			Object customerID = JOptionPane.showInputDialog(f, "Enter Customer ID:");
-
+			Object customerPassword = JOptionPane.showInputDialog(f, "Enter Customer Password;");
 			for (Customer aCustomer : customerList) {
-
 				if (aCustomer.getCustomerID().equals(customerID)) {
-					found = true;
 					customer = aCustomer;
+					if (customer.getPassword().equals(customerPassword)) {
+						found = true;
+					}
 				}
 			}
-
 			if (found == false) {
-				int reply = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?",
+				int reply = JOptionPane.showConfirmDialog(null, null, "Details are incorrect. Try again?",
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					loop = true;
 				} else if (reply == JOptionPane.NO_OPTION) {
 					f.dispose();
 					loop = false;
-					loop2 = false;
 					menuStart();
 				}
 			} else {
 				loop = false;
-			}
-		}
-
-		while (loop2) {
-			Object customerPassword = JOptionPane.showInputDialog(f, "Enter Customer Password;");
-
-			if (!customer.getPassword().equals(customerPassword)) {
-				int reply = JOptionPane.showConfirmDialog(null, null, "Incorrect password. Try again?",
-						JOptionPane.YES_NO_OPTION);
-				if (reply == JOptionPane.YES_OPTION) {
-
-				} else if (reply == JOptionPane.NO_OPTION) {
-					f.dispose();
-					loop2 = false;
-					menuStart();
-				}
-			} else {
-				loop2 = false;
 				cont = true;
 			}
 		}
-
 		if (cont) {
 			f.dispose();
 			loop = false;
@@ -957,7 +943,7 @@ public class Menu extends JFrame {
 			dOBLabel = new JLabel("Date of birth", SwingConstants.LEFT);
 			customerIDLabel = new JLabel("CustomerID:", SwingConstants.LEFT);
 			passwordLabel = new JLabel("Password:", SwingConstants.LEFT);
-			
+
 			firstNameTextField = new JTextField(20);
 			surnameTextField = new JTextField(20);
 			pPSTextField = new JTextField(20);
@@ -1305,7 +1291,7 @@ public class Menu extends JFrame {
 			}
 		});
 		f.setVisible(true);
-		
+
 		for (int i = 0; i < e.getAccounts().size(); i++) {
 			if (e.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
 				acc = e.getAccounts().get(i);
@@ -1374,7 +1360,7 @@ public class Menu extends JFrame {
 		boolean loop = true;
 		boolean on = true;
 		double withdraw = 0;
-		checkAccount(loop,on);
+		checkAccount(loop, on);
 
 		if (on == true) {
 			String balanceTest = JOptionPane.showInputDialog(f, "Enter amount you wish to withdraw (max 500):");
@@ -1410,14 +1396,14 @@ public class Menu extends JFrame {
 
 			JOptionPane.showMessageDialog(f, euro + withdraw + " withdrawn.", "Withdraw",
 					JOptionPane.INFORMATION_MESSAGE);
-			JOptionPane.showMessageDialog(f, "New balance = " +  acc.getBalance() + euro,"Withdraw",
+			JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance() + euro, "Withdraw",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
 
-	public void checkAccount(boolean loop,boolean on){
-		
+	public void checkAccount(boolean loop, boolean on) {
+
 		if (acc instanceof CustomerCurrentAccount) {
 			int count = 3;
 			int checkPin = ((CustomerCurrentAccount) acc).getAtm().getPin();
@@ -1457,13 +1443,14 @@ public class Menu extends JFrame {
 
 		}
 	}
+
 	public void lodgements() {
 
 		boolean loop = true;
 		boolean on = true;
 		double balance = 0;
-		checkAccount(loop,on);
-		
+		checkAccount(loop, on);
+
 		if (on == true) {
 			String balanceTest = JOptionPane.showInputDialog(f, "Enter amount you wish to lodge:");
 			if (isNumeric(balanceTest)) {
