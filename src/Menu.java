@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -34,7 +35,7 @@ public class Menu extends JFrame {
 	private JComboBox<String> box;
 
 	public void menuStart() {
-	
+
 		f = new JFrame("User Type");
 		f.setSize(400, 300);
 		f.setLocation(200, 200);
@@ -68,12 +69,13 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				String user = userType.getSelection().getActionCommand();
 				if (user.equals("New Customer")) {
-					System.out.println("here?");
 					NewCustomer newCustomer = new NewCustomer();
-					newCustomer.newCust(f);
+					newCustomer.newCust(customerList,f);
+					setCustomerList(newCustomer.getListOfTheCustomers());
+					menuStart();
 				} else if (user.equals("Administrator")) {
 					AdministratorLogin admin = new AdministratorLogin();
-					admin.administratorLogin();
+					admin.administratorLogin(customerList,f);
 				} else if (user.equals("Customer")) {
 					existingCustomer();
 				}
@@ -123,7 +125,7 @@ public class Menu extends JFrame {
 			content.add(buttonPanel);
 
 			returnButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) {		
+				public void actionPerformed(ActionEvent ae) {
 					Return returnClass = new Return();
 					returnClass.returnButton(f);
 				}
@@ -439,6 +441,7 @@ public class Menu extends JFrame {
 	}
 
 	public ArrayList<Customer> getCustomerList() {
+		System.out.println("In the get");
 		return customerList;
 	}
 
