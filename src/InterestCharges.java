@@ -119,7 +119,8 @@ public class InterestCharges {
 								while (loop) {
 									String interestString = JOptionPane.showInputDialog(f,
 											"Enter interest percentage you wish to apply: \n NOTE: Please enter a numerical value. (with no percentage sign) \n E.g: If you wish to apply 8% interest, enter '8'");
-									if (menu.isNumeric(interestString)) {
+									NumberCheck numberCheck= new NumberCheck();
+									if (numberCheck.isNumeric(interestString)) {
 
 										interest = Double.parseDouble(interestString);
 										loop = false;

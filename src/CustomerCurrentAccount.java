@@ -22,4 +22,13 @@ public class CustomerCurrentAccount extends CustomerAccount {
 		this.atm = atm;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomerCurrentAccount [atm=" + atm + ", getAtm()=" + getAtm() + ", getNumber()=" + getNumber()
+				+ ", getBalance()=" + getBalance() + ", getTransactionList()=" + getTransactionList() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
+
 }

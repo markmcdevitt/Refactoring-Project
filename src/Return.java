@@ -5,7 +5,5 @@ public class Return {
 
 	public void returnButton(JFrame f) {
 		f.dispose();
-		menu.menuStart();
-
 	}
 }

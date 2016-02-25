@@ -8,9 +8,7 @@ public class AdministratorLogin {
 	private ArrayList<Customer> listOfTheCustomers;
 	private JFrame f, f1;
 
-	public void administratorLogin(ArrayList<Customer> listOfTheCustomers, JFrame oldFrame) {
-
-		Menu menu = new Menu();
+	public void administratorLogin(ArrayList<Customer> listOfTheCustomers) {
 		Administrator administrator = new Administrator();
 		this.listOfTheCustomers=listOfTheCustomers;
 
@@ -35,9 +33,7 @@ public class AdministratorLogin {
 
 		while (loop2) {
 			Object adminPassword = JOptionPane.showInputDialog(f, "Enter Administrator Password;");
-
 			if (!adminPassword.equals("admin11")) {
-
 				int reply = JOptionPane.showConfirmDialog(null, null, "Incorrect Password. Try again?",
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.NO_OPTION) {

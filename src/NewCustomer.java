@@ -15,8 +15,8 @@ import javax.swing.SwingConstants;
 
 public class NewCustomer {
 
-	private ArrayList<Customer> listOfTheCustomers; 
-	private JFrame f1,f;
+	private ArrayList<Customer> listOfTheCustomers;
+	private JFrame f1, f;
 	private JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel;
 	private JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField;
 	private JPanel panel, panel2;
@@ -31,13 +31,12 @@ public class NewCustomer {
 		this.listOfTheCustomers = listOfTheCustomers;
 	}
 
-	public void newCust(ArrayList<Customer> listOfTheCustomers,JFrame oldFrame) {
-		
-		oldFrame.dispose();
+	public void newCust(ArrayList<Customer> listOfTheCustomers) {
+
 		f1 = new JFrame("Create New Customer");
 		f1.setSize(400, 300);
 		f1.setLocation(200, 200);
-		this.listOfTheCustomers=listOfTheCustomers;
+		this.listOfTheCustomers = listOfTheCustomers;
 		Container content = f1.getContentPane();
 		content.setLayout(new BorderLayout());
 
@@ -65,17 +64,18 @@ public class NewCustomer {
 
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddCustomerDetails addCustomerDetails = new AddCustomerDetails();			
-				
+				AddCustomerDetails addCustomerDetails = new AddCustomerDetails();
+
 				PPS = pPSTextField.getText();
 				firstName = firstNameTextField.getText();
 				surname = surnameTextField.getText();
 				dateOfBirth = dOBTextField.getText();
-				
-				Customer c = addCustomerDetails.addDetails(PPS,firstName,surname,dateOfBirth,f1);
+
+				Customer c = addCustomerDetails.addDetails(PPS, firstName, surname, dateOfBirth, f1);
 				listOfTheCustomers.add(c);
-				JOptionPane.showMessageDialog(f, "CustomerID = " + c.getCustomerID() + "\n Password = " + c.getPassword(),
-						"Customer created.", JOptionPane.INFORMATION_MESSAGE);			
+				JOptionPane.showMessageDialog(f,
+						"CustomerID = " + c.getCustomerID() + "\n Password = " + c.getPassword(), "Customer created.",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		JButton cancel = new JButton("Cancel");

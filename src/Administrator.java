@@ -100,12 +100,13 @@ public class Administrator {
 		for (int i = 0; i < menu.getCustomerList().size(); i++) {
 			System.out.println("in here   " + menu.getCustomerList().get(i));
 		}
+		
 
-//		bankChargesButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				bankCharges.bankCharges(listOfTheCustomers);
-//			}
-//		});
+		bankChargesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				bankCharges.bankCharges(listOfTheCustomers);
+			}
+		});
 //
 //		interestButton.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent ae) {
@@ -149,11 +150,11 @@ public class Administrator {
 //			}
 //
 //		});
-//		returnButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				returnClass.returnButton(f);
-//			}
-//		});
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				returnClass.returnButton(f);
+			}
+		});
 	}
 
 	public ArrayList<Customer> getListOfTheCustomers() {

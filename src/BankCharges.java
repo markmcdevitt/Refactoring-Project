@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,28 +19,26 @@ public class BankCharges {
 	private Customer customer;
 	private CustomerAccount acc;
 	private JFrame f;
+	private JComboBox<String> box;
 
-	public void bankCharges( ArrayList<Customer> listOfTheCustomers) {
+	public void bankCharges(ArrayList<Customer> listOfTheCustomers) {
 
 		
 		Return returnClass = new Return();
-		Menu menu = new Menu();
-		Administrator administrator = new Administrator();
-		
-		boolean loop = true;
 
+		boolean loop = true;
 		boolean found = false;
 
-		if (menu.getCustomerList().isEmpty()) {
+		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(f, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
-			administrator.admin(listOfTheCustomers);
+			f.dispose();
 
 		} else {
 			while (loop) {
 				Object customerID = JOptionPane.showInputDialog(f,
 						"Customer ID of Customer You Wish to Apply Charges to:");
 
-				for (Customer aCustomer : menu.getCustomerList()) {
+				for (Customer aCustomer : listOfTheCustomers) {
 
 					if (aCustomer.getCustomerID().equals(customerID)) {
 						found = true;
@@ -54,13 +53,9 @@ public class BankCharges {
 					if (reply == JOptionPane.YES_OPTION) {
 						loop = true;
 					} else if (reply == JOptionPane.NO_OPTION) {
-						f.dispose();
 						loop = false;
-
-						administrator.admin(listOfTheCustomers);
 					}
 				} else {
-					f.dispose();
 					f = new JFrame("Administrator Menu");
 					f.setSize(400, 300);
 					f.setLocation(200, 200);
@@ -71,7 +66,8 @@ public class BankCharges {
 					});
 					f.setVisible(true);
 
-					JComboBox<String> box = new JComboBox<String>();
+					JPanel boxPanel = new JPanel();
+					box = new JComboBox<String>();
 					for (int i = 0; i < customer.getAccounts().size(); i++) {
 
 						box.addItem(customer.getAccounts().get(i).getNumber());
@@ -79,7 +75,7 @@ public class BankCharges {
 
 					box.getSelectedItem();
 
-					JPanel boxPanel = new JPanel();
+					
 					boxPanel.add(box);
 
 					JPanel buttonPanel = new JPanel();
@@ -98,19 +94,18 @@ public class BankCharges {
 								"This customer has no accounts! \n The admin must add acounts to this customer.",
 								"Oops!", JOptionPane.INFORMATION_MESSAGE);
 						f.dispose();
-						administrator.admin(listOfTheCustomers);
 					} else {
-
 						for (int i = 0; i < customer.getAccounts().size(); i++) {
 							if (customer.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
 								acc = customer.getAccounts().get(i);
+								System.out.println(customer.getAccounts().get(i).toString());
 							}
 						}
 
 						continueButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent ae) {
-								String euro = "\u20ac";
-
+								String euro = "€";
+								
 								if (acc instanceof CustomerDepositAccount) {
 
 									JOptionPane.showMessageDialog(f, "25" + euro + " deposit account fee aplied.", "",
@@ -118,19 +113,38 @@ public class BankCharges {
 									acc.setBalance(acc.getBalance() - 25);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
 											JOptionPane.INFORMATION_MESSAGE);
+									
+									Date date = new Date();
+									String date2 = date.toString();
+									String type = "Lodgement";
+									double amount = acc.getBalance();
+
+									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
+									acc.getTransactionList().add(transaction);
+									acc=null;
 								}
 
 								if (acc instanceof CustomerCurrentAccount) {
 
 									JOptionPane.showMessageDialog(f, "15" + euro + " current account fee aplied.", "",
 											JOptionPane.INFORMATION_MESSAGE);
-									acc.setBalance(acc.getBalance() - 25);
+									acc.setBalance(acc.getBalance() - 15);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
 											JOptionPane.INFORMATION_MESSAGE);
+									
+									Date date = new Date();
+									String date2 = date.toString();
+									String type = "Lodgement";
+									double amount = acc.getBalance();
+
+									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
+									acc.getTransactionList().add(transaction);
+									acc=null;
+									
 								}
 
 								f.dispose();
-								administrator.admin(listOfTheCustomers);
+								
 							}
 						});
 

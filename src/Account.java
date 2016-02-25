@@ -87,8 +87,6 @@ public class Account {
 						customer.getAccounts().add(deposit);
 						JOptionPane.showMessageDialog(f, "Account number = " + number, "Account created.",
 								JOptionPane.INFORMATION_MESSAGE);
-
-						f.dispose();
 					}
 
 				}
