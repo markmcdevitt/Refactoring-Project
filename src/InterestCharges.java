@@ -20,14 +20,13 @@ public class InterestCharges {
 	private CustomerAccount acc;
 	private JFrame f;
 
-	public void interestCharges() {
+	public void interestCharges(ArrayList<Customer> listOfTheCustomers) {
 
-		Administrator administrator = new Administrator();
-		Menu menu = new Menu();
+		this.listOfTheCustomers=listOfTheCustomers;
 		boolean loop = true;
 		boolean found = false;
 
-		if (menu.getCustomerList().isEmpty()) {
+		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(f, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
 			try {
 				f.dispose();
@@ -40,7 +39,7 @@ public class InterestCharges {
 				Object customerID = JOptionPane.showInputDialog(f,
 						"Customer ID of Customer You Wish to Apply Interest to:");
 
-				for (Customer aCustomer : menu.getCustomerList()) {
+				for (Customer aCustomer : listOfTheCustomers) {
 
 					if (aCustomer.getCustomerID().equals(customerID)) {
 						found = true;
@@ -57,11 +56,8 @@ public class InterestCharges {
 					} else if (reply == JOptionPane.NO_OPTION) {
 						f.dispose();
 						loop = false;
-
-						administrator.admin(listOfTheCustomers);
 					}
 				} else {
-					f.dispose();
 					f = new JFrame("Administrator Menu");
 					f.setSize(400, 300);
 					f.setLocation(200, 200);
@@ -101,7 +97,6 @@ public class InterestCharges {
 								"This customer has no accounts! \n The admin must add acounts to this customer.",
 								"Oops!", JOptionPane.INFORMATION_MESSAGE);
 						f.dispose();
-						administrator.admin(listOfTheCustomers);
 					} else {
 
 						for (int i = 0; i < customer.getAccounts().size(); i++) {
@@ -112,7 +107,7 @@ public class InterestCharges {
 
 						continueButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent ae) {
-								String euro = "\u20ac";
+								String euro = "€";
 								double interest = 0;
 								boolean loop = true;
 
@@ -145,7 +140,7 @@ public class InterestCharges {
 
 						returnButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent ae) {
-								menu.menuStart();
+								f.dispose();
 							}
 						});
 

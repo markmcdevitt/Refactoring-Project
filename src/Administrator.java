@@ -107,12 +107,12 @@ public class Administrator {
 				bankCharges.bankCharges(listOfTheCustomers);
 			}
 		});
-//
-//		interestButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				interestCharges.interestCharges();
-//			}
-//		});
+
+		interestButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				interestCharges.interestCharges(listOfTheCustomers);
+			}
+		});
 //
 //		editCustomerButton.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent ae) {

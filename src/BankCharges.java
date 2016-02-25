@@ -23,7 +23,6 @@ public class BankCharges {
 
 	public void bankCharges(ArrayList<Customer> listOfTheCustomers) {
 
-		
 		Return returnClass = new Return();
 
 		boolean loop = true;
@@ -75,7 +74,6 @@ public class BankCharges {
 
 					box.getSelectedItem();
 
-					
 					boxPanel.add(box);
 
 					JPanel buttonPanel = new JPanel();
@@ -98,14 +96,13 @@ public class BankCharges {
 						for (int i = 0; i < customer.getAccounts().size(); i++) {
 							if (customer.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
 								acc = customer.getAccounts().get(i);
-								System.out.println(customer.getAccounts().get(i).toString());
 							}
 						}
 
 						continueButton.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent ae) {
 								String euro = "€";
-								
+
 								if (acc instanceof CustomerDepositAccount) {
 
 									JOptionPane.showMessageDialog(f, "25" + euro + " deposit account fee aplied.", "",
@@ -113,7 +110,7 @@ public class BankCharges {
 									acc.setBalance(acc.getBalance() - 25);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
 											JOptionPane.INFORMATION_MESSAGE);
-									
+
 									Date date = new Date();
 									String date2 = date.toString();
 									String type = "Lodgement";
@@ -122,16 +119,15 @@ public class BankCharges {
 									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
 									acc.getTransactionList().add(transaction);
 									acc=null;
-								}
 
-								if (acc instanceof CustomerCurrentAccount) {
+								} else if (acc instanceof CustomerCurrentAccount) {
 
 									JOptionPane.showMessageDialog(f, "15" + euro + " current account fee aplied.", "",
 											JOptionPane.INFORMATION_MESSAGE);
 									acc.setBalance(acc.getBalance() - 15);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
 											JOptionPane.INFORMATION_MESSAGE);
-									
+
 									Date date = new Date();
 									String date2 = date.toString();
 									String type = "Lodgement";
@@ -140,11 +136,9 @@ public class BankCharges {
 									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
 									acc.getTransactionList().add(transaction);
 									acc=null;
-									
-								}
 
+								}
 								f.dispose();
-								
 							}
 						});
 
