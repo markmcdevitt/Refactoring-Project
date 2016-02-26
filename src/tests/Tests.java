@@ -1,11 +1,8 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
 import org.junit.Assert;
 import org.junit.Test;
 
