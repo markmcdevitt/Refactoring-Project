@@ -25,19 +25,17 @@ public class WithdrawClass {
 
 		this.acc=acc;
 		this.customer=customer;
-		Date date = new Date();
-		boolean on = true;
-		double withdraw = 0;
 		
+		double withdraw = 0;
+		String type = "withdraw";
 		PinCheck pinCheck = new PinCheck();
-		boolean on2=pinCheck.checkAccount(customer, on,acc);
+		boolean on2=pinCheck.checkAccount(customer,acc);
 
 		if (on2) {
 			String balanceTest = JOptionPane.showInputDialog(f, "Enter amount you wish to withdraw (max 500):");
 			NumberCheck numberCheck=new NumberCheck();
 			if (numberCheck.isNumeric(balanceTest)) {
 				withdraw = Double.parseDouble(balanceTest);
-
 			} else {
 				JOptionPane.showMessageDialog(f, "You must enter a numerical value!", "!",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -47,19 +45,9 @@ public class WithdrawClass {
 						"Oops!", JOptionPane.INFORMATION_MESSAGE);
 				withdraw = 0;
 			}
-			String euro = "\u20ac";
-			acc.setBalance(acc.getBalance() - withdraw);
-			String date2 = date.toString();
-			String type = "Withdraw";
-			double amount = withdraw;
-
-			AccountTransaction transaction = new AccountTransaction(date2, type, amount);
-			acc.getTransactionList().add(transaction);
-
-			JOptionPane.showMessageDialog(f, euro + withdraw + " withdrawn.", "Withdraw",
-					JOptionPane.INFORMATION_MESSAGE);
-			JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance() + euro, "Withdraw",
-					JOptionPane.INFORMATION_MESSAGE);
+			BalanceUpdate balanceUpdate =new BalanceUpdate();
+			balanceUpdate.theBalance(type,withdraw,acc);
+			
 		}else{
 			oldFrame.dispose();
 			chooseAccountFrame.dispose();

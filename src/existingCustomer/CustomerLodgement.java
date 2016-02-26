@@ -25,11 +25,10 @@ public class CustomerLodgement{
 		this.customer = customer;
 		this.acc=acc;
 		
-		boolean on = true;
 		double balance = 0;
+		String type = "lodgement";
 		PinCheck pinCheck = new PinCheck();
-		boolean on2=pinCheck.checkAccount(customer, on,acc);
-		System.out.println(on2 + " in the lodgement");
+		boolean on2=pinCheck.checkAccount(customer,acc);
 		if (on2) {
 			String balanceTest = JOptionPane.showInputDialog(f, "Enter amount you wish to lodge:");
 			NumberCheck numberCheck=new NumberCheck();
@@ -41,20 +40,8 @@ public class CustomerLodgement{
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
-			String euro = "€";
-			acc.setBalance(acc.getBalance() + balance);
-			Date date = new Date();
-			String date2 = date.toString();
-			String type = "Lodgement";
-			double amount = balance;
-
-			AccountTransaction transaction = new AccountTransaction(date2, type, amount);
-			acc.getTransactionList().add(transaction);
-
-			JOptionPane.showMessageDialog(f, balance + euro + " added do you account!", "Lodgement",
-					JOptionPane.INFORMATION_MESSAGE);
-			JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance() + euro, "Lodgement",
-					JOptionPane.INFORMATION_MESSAGE);
+			BalanceUpdate balanceUpdate =new BalanceUpdate();
+			balanceUpdate.theBalance(type,balance,acc);
 		}else{
 			oldFrame.dispose();
 			chooseAccountFrame.dispose();
