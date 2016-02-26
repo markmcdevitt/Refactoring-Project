@@ -103,7 +103,6 @@ public class DeleteAccount {
 				System.out.println("in the delete "+customer.getAccounts().get(i));
 				customer.getAccounts().remove(i);
 				JOptionPane.showMessageDialog(f, "This account is deleted", "Delete Account", JOptionPane.INFORMATION_MESSAGE);
-				
 			}
 		}
 		

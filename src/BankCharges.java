@@ -105,7 +105,7 @@ public class BankCharges {
 
 								if (acc instanceof CustomerDepositAccount) {
 
-									JOptionPane.showMessageDialog(f, "25" + euro + " deposit account fee aplied.", "",
+									JOptionPane.showMessageDialog(f, "25" + euro + " deposit account fee applied.", "",
 											JOptionPane.INFORMATION_MESSAGE);
 									acc.setBalance(acc.getBalance() - 25);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
@@ -113,16 +113,16 @@ public class BankCharges {
 
 									Date date = new Date();
 									String date2 = date.toString();
-									String type = "Lodgement";
+									String type = "Bank Charge on Current Account";
 									double amount = acc.getBalance();
 
 									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
 									acc.getTransactionList().add(transaction);
-									acc=null;
+									
 
 								} else if (acc instanceof CustomerCurrentAccount) {
 
-									JOptionPane.showMessageDialog(f, "15" + euro + " current account fee aplied.", "",
+									JOptionPane.showMessageDialog(f, "15" + euro + " current account fee applied.", "",
 											JOptionPane.INFORMATION_MESSAGE);
 									acc.setBalance(acc.getBalance() - 15);
 									JOptionPane.showMessageDialog(f, "New balance = " + acc.getBalance(), "Success!",
@@ -130,12 +130,12 @@ public class BankCharges {
 
 									Date date = new Date();
 									String date2 = date.toString();
-									String type = "Lodgement";
+									String type = "Bank Charge on Deposit Account";
 									double amount = acc.getBalance();
 
 									AccountTransaction transaction = new AccountTransaction(date2, type, amount);
 									acc.getTransactionList().add(transaction);
-									acc=null;
+									
 
 								}
 								f.dispose();

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,31 +16,24 @@ import javax.swing.SwingConstants;
 public class Navigate {
 
 	private ArrayList<Customer> listOfTheCustomers;
-	private ArrayList<Customer> customerList = new ArrayList<Customer>();
 	private int position = 0;
-	private Customer customer, e;
-	private CustomerAccount acc;
-	private JFrame f, f1;
+	private JFrame f;
 	private JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel;
 	private JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField,
 			passwordTextField;
 	private Container content;
-	private JComboBox<String> box;
 
 	public void navigate(ArrayList<Customer> listOfTheCustomers) {
-
 		this.listOfTheCustomers = listOfTheCustomers;
 
 		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "There are currently no customers to display. ");
 		} else {
-
 			JButton first, previous, next, last, cancel;
 			JPanel gridPanel, buttonPanel, cancelPanel;
 			f = new JFrame("Navigate Menu");
 
 			content = f.getContentPane();
-
 			content.setLayout(new BorderLayout());
 
 			buttonPanel = new JPanel();
@@ -68,12 +60,7 @@ public class Navigate {
 			last = new JButton("Last");
 			cancel = new JButton("Cancel");
 
-			firstNameTextField.setText(listOfTheCustomers.get(0).getFirstName());
-			surnameTextField.setText(listOfTheCustomers.get(0).getSurname());
-			pPSTextField.setText(listOfTheCustomers.get(0).getPPS());
-			dOBTextField.setText(listOfTheCustomers.get(0).getDOB());
-			customerIDTextField.setText(listOfTheCustomers.get(0).getCustomerID());
-			passwordTextField.setText(listOfTheCustomers.get(0).getPassword());
+			positionInList(position);
 
 			firstNameTextField.setEditable(false);
 			surnameTextField.setEditable(false);
@@ -99,67 +86,40 @@ public class Navigate {
 			buttonPanel.add(previous);
 			buttonPanel.add(next);
 			buttonPanel.add(last);
-
 			cancelPanel.add(cancel);
 
 			content.add(gridPanel, BorderLayout.NORTH);
 			content.add(buttonPanel, BorderLayout.CENTER);
 			content.add(cancelPanel, BorderLayout.AFTER_LAST_LINE);
+
 			first.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					position = 0;
-					firstNameTextField.setText(listOfTheCustomers.get(0).getFirstName());
-					surnameTextField.setText(listOfTheCustomers.get(0).getSurname());
-					pPSTextField.setText(listOfTheCustomers.get(0).getPPS());
-					dOBTextField.setText(listOfTheCustomers.get(0).getDOB());
-					customerIDTextField.setText(listOfTheCustomers.get(0).getCustomerID());
-					passwordTextField.setText(listOfTheCustomers.get(0).getPassword());
+					positionInList(position);
 				}
 			});
-
 			previous.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					position = position - 1;
-
-					firstNameTextField.setText(listOfTheCustomers.get(position).getFirstName());
-					surnameTextField.setText(listOfTheCustomers.get(position).getSurname());
-					pPSTextField.setText(listOfTheCustomers.get(position).getPPS());
-					dOBTextField.setText(listOfTheCustomers.get(position).getDOB());
-					customerIDTextField.setText(listOfTheCustomers.get(position).getCustomerID());
-					passwordTextField.setText(listOfTheCustomers.get(position).getPassword());
-
+					if (!positionInList(position)) {
+						position = position + 1;
+					}
 				}
 			});
-
 			next.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-
 					position = position + 1;
-
-					firstNameTextField.setText(listOfTheCustomers.get(position).getFirstName());
-					surnameTextField.setText(listOfTheCustomers.get(position).getSurname());
-					pPSTextField.setText(listOfTheCustomers.get(position).getPPS());
-					dOBTextField.setText(listOfTheCustomers.get(position).getDOB());
-					customerIDTextField.setText(listOfTheCustomers.get(position).getCustomerID());
-					passwordTextField.setText(listOfTheCustomers.get(position).getPassword());
-
+					if (!positionInList(position)) {
+						position = position - 1;
+					}
 				}
 			});
-
 			last.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-
-					position = listOfTheCustomers.size()-1;
-
-					firstNameTextField.setText(listOfTheCustomers.get(position).getFirstName());
-					surnameTextField.setText(listOfTheCustomers.get(position).getSurname());
-					pPSTextField.setText(listOfTheCustomers.get(position).getPPS());
-					dOBTextField.setText(listOfTheCustomers.get(position).getDOB());
-					customerIDTextField.setText(listOfTheCustomers.get(position).getCustomerID());
-					passwordTextField.setText(listOfTheCustomers.get(position).getPassword());
+					position = listOfTheCustomers.size() - 1;
+					positionInList(position);
 				}
 			});
-
 			cancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
 					position = 0;
@@ -170,7 +130,21 @@ public class Navigate {
 			f.setSize(400, 300);
 			f.setVisible(true);
 		}
-
 	}
 
+	public boolean positionInList(int position) {
+		try {
+			firstNameTextField.setText(listOfTheCustomers.get(position).getFirstName());
+			surnameTextField.setText(listOfTheCustomers.get(position).getSurname());
+			pPSTextField.setText(listOfTheCustomers.get(position).getPPS());
+			dOBTextField.setText(listOfTheCustomers.get(position).getDOB());
+			customerIDTextField.setText(listOfTheCustomers.get(position).getCustomerID());
+			passwordTextField.setText(listOfTheCustomers.get(position).getPassword());
+			return true;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(f, "There are no more users", "No more users",
+					JOptionPane.INFORMATION_MESSAGE);
+			return false;
+		}
+	}
 }

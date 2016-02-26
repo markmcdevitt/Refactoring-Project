@@ -135,6 +135,7 @@ public class EditCustomerDetails {
 					customer.setPassword(passwordTextField.getText());
 
 					JOptionPane.showMessageDialog(null, "Changes Saved.");
+					f.dispose();
 				}
 			});
 
