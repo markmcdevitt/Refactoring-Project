@@ -86,7 +86,7 @@ public class Administrator {
 		JLabel label1 = new JLabel("Please select an option");
 
 		content = f.getContentPane();
-		content.setLayout(new GridLayout(9, 1));
+		content.setLayout(new GridLayout(10, 1));
 		content.add(label1);
 		content.add(accountPanel);
 		content.add(bankChargesPanel);
@@ -95,7 +95,9 @@ public class Administrator {
 		content.add(navigatePanel);
 		content.add(summaryPanel);
 		content.add(deleteCustomerPanel);
+		content.add(deleteAccountPanel);
 		content.add(returnPanel);
+		
 
 		for (int i = 0; i < menu.getCustomerList().size(); i++) {
 			System.out.println("in here   " + menu.getCustomerList().get(i));
@@ -138,18 +140,18 @@ public class Administrator {
 			}
 		});
 
-//		deleteCustomer.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				deleteCust.deleteCustomer(listOfTheCustomers);
-//			}
-//		});
-//
-//		deleteAccount.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				deleteAccountClass.deleteAccount();
-//			}
-//
-//		});
+		deleteCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				deleteCust.deleteCustomer(listOfTheCustomers);
+			}
+		});
+
+		deleteAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				deleteAccountClass.deleteAccount(listOfTheCustomers);
+			}
+
+		});
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				returnClass.returnButton(f);

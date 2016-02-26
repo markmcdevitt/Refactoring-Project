@@ -1,42 +1,27 @@
-import java.awt.Container;
 import java.util.ArrayList;
 
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class DeleteCustomer{
 
-	private ArrayList<Customer> listOfTheCustomers ;
-	private int position = 0;
-	private Customer customer, e;
-	private CustomerAccount acc;
-	private JFrame f, f1;
-	private JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel;
-	private JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField,
-			passwordTextField;
-	private Container content;
-	private JComboBox<String> box;
-	
-
-	Menu menu = new Menu();
-	Administrator administrator = new Administrator();
+	private ArrayList<Customer> listOfTheCustomers;
+	private Customer customer;
+	private JFrame f;
 	
 	public void deleteCustomer(ArrayList<Customer> listOfTheCustomers) {
+		this.listOfTheCustomers=listOfTheCustomers;
 
-		boolean found = true, loop = true;
+		boolean found = true;
+		boolean loop = true;
 
-		if (menu.getCustomerList().isEmpty()) {
+		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "There are currently no customers to display. ");
-			menu.dispose();
-			administrator.admin(listOfTheCustomers);
 		} else {
 			{
 				Object customerID = JOptionPane.showInputDialog(f, "Customer ID of Customer You Wish to Delete:");
 
-				for (Customer aCustomer : menu.getCustomerList()) {
+				for (Customer aCustomer :listOfTheCustomers) {
 
 					if (aCustomer.getCustomerID().equals(customerID)) {
 						found = true;
@@ -53,8 +38,6 @@ public class DeleteCustomer{
 					} else if (reply == JOptionPane.NO_OPTION) {
 						f.dispose();
 						loop = false;
-
-						administrator.admin(listOfTheCustomers);
 					}
 				} else {
 					if (customer.getAccounts().size() > 0) {
@@ -62,7 +45,7 @@ public class DeleteCustomer{
 								"This customer has accounts. \n You must delete a customer's accounts before deleting a customer ",
 								"Oops!", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						menu.getCustomerList().remove(customer);
+						listOfTheCustomers.remove(customer);
 						JOptionPane.showMessageDialog(f, "Customer Deleted ", "Success.",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
@@ -72,5 +55,4 @@ public class DeleteCustomer{
 		}
 
 	}
-
 }

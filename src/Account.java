@@ -8,7 +8,6 @@ public class Account {
 	private Customer customer;
 	private JFrame f;
 
-	Menu menu = new Menu();
 	public void account(ArrayList<Customer>listOfTheCustomers) {
 
 		this.setListOfTheCustomers(listOfTheCustomers);
@@ -54,7 +53,7 @@ public class Account {
 						
 						boolean valid = true;
 						double balance = 0;
-						String number = String.valueOf("C" + (menu.getCustomerList().indexOf(customer) + 1) * 10
+						String number = String.valueOf("C" + (listOfTheCustomers.indexOf(customer) + 1) * 10
 								+ (customer.getAccounts().size() + 1));
 						ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 						int randomPIN = (int) (Math.random() * 9000) + 1000;
@@ -74,9 +73,8 @@ public class Account {
 					}
 
 					if (account.equals("Deposit Account")) {
-
 						double balance = 0, interest = 0;
-						String number = String.valueOf("D" + (menu.getCustomerList().indexOf(customer) + 1) * 10
+						String number = String.valueOf("D" + (listOfTheCustomers.indexOf(customer) + 1) * 10
 								+ (customer.getAccounts().size() + 1));
 						ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 
