@@ -19,15 +19,12 @@ import javax.swing.SwingConstants;
 
 public class EditCustomerDetails {
 
-	private ArrayList<Customer> listOfTheCustomers;
 	private Customer customer;
 	private JFrame f;
 	private JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel;
 	private JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField,
 			passwordTextField;
 
-	Menu menu = new Menu();
-	Administrator administrator = new Administrator();
 
 	public void editCustomer(ArrayList<Customer> listOfTheCustomers) {
 
@@ -35,16 +32,16 @@ public class EditCustomerDetails {
 
 		boolean found = false;
 
-		if (menu.getCustomerList().isEmpty()) {
+		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(f, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
-			administrator.admin(listOfTheCustomers);
+			f.dispose();
 
 		} else {
 
 			while (loop) {
 				Object customerID = JOptionPane.showInputDialog(f, "Enter Customer ID:");
 
-				for (Customer aCustomer : menu.getCustomerList()) {
+				for (Customer aCustomer :listOfTheCustomers) {
 
 					if (aCustomer.getCustomerID().equals(customerID)) {
 						found = true;
@@ -59,7 +56,6 @@ public class EditCustomerDetails {
 						loop = true;
 					} else if (reply == JOptionPane.NO_OPTION) {
 						loop = false;
-						administrator.admin(listOfTheCustomers);
 					}
 				} else {
 					loop = false;
@@ -144,7 +140,7 @@ public class EditCustomerDetails {
 
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-					administrator.admin(listOfTheCustomers);
+					f.dispose();
 				}
 			});
 		}

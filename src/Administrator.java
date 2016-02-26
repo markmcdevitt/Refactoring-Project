@@ -113,24 +113,24 @@ public class Administrator {
 				interestCharges.interestCharges(listOfTheCustomers);
 			}
 		});
-//
-//		editCustomerButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				editCustomerDetails.editCustomer(listOfTheCustomers);
-//			}
-//		});
-//
-//		summaryButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				summaryClass.summary();
-//			}
-//		});
-//
-//		navigateButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				navigateClass.navigate(listOfTheCustomers);
-//			}
-//		});
+
+		editCustomerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				editCustomerDetails.editCustomer(listOfTheCustomers);
+			}
+		});
+
+		summaryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				summaryClass.summary(listOfTheCustomers);
+			}
+		});
+
+		navigateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				navigateClass.navigate(listOfTheCustomers);
+			}
+		});
 
 		accountButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {

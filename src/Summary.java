@@ -24,10 +24,7 @@ public class Summary {
 	public void summary(ArrayList<Customer>listOfTheCustomers) {
 
 		this.listOfTheCustomers=listOfTheCustomers;
-		Menu menu = new Menu();
-		Administrator administrator = new Administrator();
 
-		f.dispose();
 		f = new JFrame("Summary of Transactions");
 		f.setSize(400, 700);
 		f.setLocation(200, 200);
@@ -56,10 +53,10 @@ public class Summary {
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		textPanel.add(scrollPane);
 
-		for (int a = 0; a < menu.getCustomerList().size(); a++) {
-			for (int b = 0; b < menu.getCustomerList().get(a).getAccounts().size(); b++) {
-				acc = menu.getCustomerList().get(a).getAccounts().get(b);
-				for (int c = 0; c < menu.getCustomerList().get(a).getAccounts().get(b).getTransactionList()
+		for (int a = 0; a < listOfTheCustomers.size(); a++) {
+			for (int b = 0; b < listOfTheCustomers.get(a).getAccounts().size(); b++) {
+				acc = listOfTheCustomers.get(a).getAccounts().get(b);
+				for (int c = 0; c < listOfTheCustomers.get(a).getAccounts().get(b).getTransactionList()
 						.size(); c++) {
 
 					textArea.append(acc.getTransactionList().get(c).toString());
@@ -68,7 +65,6 @@ public class Summary {
 		}
 
 		textPanel.add(textArea);
-		content.removeAll();
 
 		Container content = f.getContentPane();
 		content.setLayout(new GridLayout(1, 1));
@@ -77,7 +73,7 @@ public class Summary {
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				f.dispose();
-				administrator.admin(listOfTheCustomers);
+				
 			}
 		});
 
