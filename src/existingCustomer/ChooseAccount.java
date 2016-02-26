@@ -1,10 +1,9 @@
 package existingCustomer;
+
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,15 +14,14 @@ import javax.swing.JPanel;
 import entity.Customer;
 import entity.CustomerAccount;
 
-public class ChooseAccount{
+public class ChooseAccount {
 
-	private ArrayList<Customer> customerList = new ArrayList<Customer>();
 	private Customer customer;
 	private CustomerAccount acc;
 	private JFrame f;
 	private Container content;
 	private JComboBox<String> box;
-	
+
 	public void customer(Customer customer) {
 
 		f = new JFrame("Customer Menu");
@@ -71,8 +69,8 @@ public class ChooseAccount{
 			System.out.println("in the choose account");
 			continueButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {
-					UserAccount userAccount=new UserAccount();
-					userAccount.continueButton(customer,box,f);
+					UserAccount userAccount = new UserAccount();
+					userAccount.continueButton(customer, box, f);
 				}
 			});
 		}

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Menu.Menu;
 import entity.Customer;
+import frames.JFrameClass;
 
 public class Administrator {
 
@@ -35,10 +36,8 @@ public class Administrator {
 		DeleteCustomer deleteCust = new DeleteCustomer();
 		DeleteAccount deleteAccountClass = new DeleteAccount();
 
-		f = new JFrame("Administrator Menu");
-		f.setSize(400, 400);
-		f.setLocation(200, 200);
-		f.setVisible(true);
+		JFrameClass jFrameClass = new JFrameClass();
+		f = jFrameClass.createJFrame("Administrator Menu",400,300,200,200);
 
 		JPanel deleteCustomerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton deleteCustomer = new JButton("Delete Customer");

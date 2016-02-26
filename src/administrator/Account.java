@@ -18,8 +18,7 @@ public class Account {
 	public void account(ArrayList<Customer>listOfTheCustomers) {
 
 		this.setListOfTheCustomers(listOfTheCustomers);
-		
-		System.out.println(listOfTheCustomers);
+
 		if (listOfTheCustomers.isEmpty()) {
 			JOptionPane.showMessageDialog(f, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
 		} else {
@@ -29,7 +28,7 @@ public class Account {
 
 			while (loop) {
 				Object customerID = JOptionPane.showInputDialog(f,
-						"Customer ID of Customer You Wish to Add an Account to:");
+						"Customer ID of Customer Yosu Wish to Add an Account to:");
 
 				for (Customer aCustomer : listOfTheCustomers) {
 
@@ -49,8 +48,7 @@ public class Account {
 
 					}
 				} else {
-					loop = false;
-				
+					loop = false;	
 					String[] choices = { "Current Account", "Deposit Account" };
 					String account = (String) JOptionPane.showInputDialog(null, "Please choose account type",
 							"Account Type", JOptionPane.QUESTION_MESSAGE, null, choices, choices[1]);
@@ -69,8 +67,6 @@ public class Account {
 
 						CustomerCurrentAccount current = new CustomerCurrentAccount(atm, number, balance,
 								transactionList);
-
-						System.out.println("Current account "+current);
 						customer.getAccounts().add(current);
 						JOptionPane.showMessageDialog(f, "Account number = " + number + "\n PIN = " + pin,
 								"Account created.", JOptionPane.INFORMATION_MESSAGE);
@@ -87,7 +83,6 @@ public class Account {
 						CustomerDepositAccount deposit = new CustomerDepositAccount(interest, number, balance,
 								transactionList);
 
-						System.out.println("The deposit "+deposit);
 						customer.getAccounts().add(deposit);
 						JOptionPane.showMessageDialog(f, "Account number = " + number, "Account created.",
 								JOptionPane.INFORMATION_MESSAGE);

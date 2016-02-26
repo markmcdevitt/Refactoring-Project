@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class Customer {
 
-	private String PPS;
+	private String pps;
 	private String surname;
 	private String firstName;
-	private String DOB;
+	private String dateOfBirth;
 	private String customerID;
 	private String password;
 
@@ -17,20 +17,20 @@ public class Customer {
 	}
 
 	// Constructor with details
-	public Customer(String PPS, String surname, String firstName, String DOB, String customerID, String password,
+	public Customer(String pps, String surname, String firstName, String dateOfBirth, String customerID, String password,
 			ArrayList<CustomerAccount> accounts) {
-		this.PPS = PPS;
+		this.pps = pps;
 		this.surname = surname;
 		this.firstName = firstName;
-		this.DOB = DOB;
+		this.dateOfBirth = dateOfBirth;
 		this.customerID = customerID;
 		this.password = password;
 		this.accounts = accounts;
 	}
 
 	// Accessor methods
-	public String getPPS() {
-		return this.PPS;
+	public String getPps() {
+		return this.pps;
 	}
 
 	public String getSurname() {
@@ -41,8 +41,8 @@ public class Customer {
 		return this.firstName;
 	}
 
-	public String getDOB() {
-		return this.DOB;
+	public String getDateOfBirth() {
+		return this.dateOfBirth;
 	}
 
 	public String getCustomerID() {
@@ -58,8 +58,8 @@ public class Customer {
 	}
 
 	// mutator methods
-	public void setPPS(String PPS) {
-		this.PPS = PPS;
+	public void setPps(String pps) {
+		this.pps = pps;
 	}
 
 	public void setSurname(String surname) {
@@ -70,8 +70,8 @@ public class Customer {
 		this.firstName = firstName;
 	}
 
-	public void setDOB(String DOB) {
-		this.DOB = DOB;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public void setCustomerID(String customerID) {
@@ -88,7 +88,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [PPS=" + PPS + ", surname=" + surname + ", firstName=" + firstName + ", DOB=" + DOB
+		return "Customer [PPS=" + pps + ", surname=" + surname + ", firstName=" + firstName + ", DOB=" + dateOfBirth
 				+ ", customerID=" + customerID + ", password=" + password + ", accounts=" + accounts + "]";
 	}
 

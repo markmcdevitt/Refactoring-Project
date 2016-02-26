@@ -18,27 +18,20 @@ import javax.swing.JTextArea;
 
 import entity.Customer;
 import entity.CustomerAccount;
+import frames.JFrameClass;
 
 public class CustomerStatment{
 	
-	private ArrayList<Customer> customerList = new ArrayList<Customer>();
 	private Customer customer;
 	private CustomerAccount acc;
 	private JFrame f;
-	private Container content;
 	private JComboBox<String> box;
 
 	public void statments(Customer customer, CustomerAccount acc) {
 
-		f = new JFrame("Customer Menu");
-		f.setSize(400, 600);
-		f.setLocation(200, 200);
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
-		});
-		f.setVisible(true);
+	
+		JFrameClass jFrameClass = new JFrameClass();
+		f = jFrameClass.createJFrame("Customer Menu",400,300,200,200);
 
 		JLabel label1 = new JLabel("Summary of account transactions: ");
 
@@ -64,7 +57,6 @@ public class CustomerStatment{
 		textArea.append(Double.toString(acc.getBalance()));
 
 		textPanel.add(textArea);
-		//content.removeAll();
 
 		Container content = f.getContentPane();
 		content.setLayout(new GridLayout(1, 1));

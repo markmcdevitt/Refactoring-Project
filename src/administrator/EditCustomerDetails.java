@@ -73,8 +73,8 @@ public class EditCustomerDetails {
 
 			firstNameTextField.setText(customer.getFirstName());
 			surnameTextField.setText(customer.getSurname());
-			pPSTextField.setText(customer.getPPS());
-			dOBTextField.setText(customer.getDOB());
+			pPSTextField.setText(customer.getPps());
+			dOBTextField.setText(customer.getDateOfBirth());
 			customerIDTextField.setText(customer.getCustomerID());
 			passwordTextField.setText(customer.getPassword());
 
@@ -99,8 +99,8 @@ public class EditCustomerDetails {
 
 					customer.setFirstName(firstNameTextField.getText());
 					customer.setSurname(surnameTextField.getText());
-					customer.setPPS(pPSTextField.getText());
-					customer.setDOB(dOBTextField.getText());
+					customer.setPps(pPSTextField.getText());
+					customer.setDateOfBirth(dOBTextField.getText());
 					customer.setCustomerID(customerIDTextField.getText());
 					customer.setPassword(passwordTextField.getText());
 					JOptionPane.showMessageDialog(null, "Changes Saved.");

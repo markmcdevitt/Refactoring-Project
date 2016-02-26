@@ -12,7 +12,7 @@ import entity.CustomerAccount;
 public class ExistingCustomer {
 
 	private ArrayList<Customer> customerList = new ArrayList<Customer>();
-	private Customer customer, e;
+	private Customer customer;
 	private CustomerAccount acc;
 	private JFrame f;
 	private Container content;

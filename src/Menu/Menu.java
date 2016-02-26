@@ -1,5 +1,4 @@
 package Menu;
-
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,9 +15,8 @@ import javax.swing.JRadioButton;
 import administrator.AdministratorLogin;
 import entity.Customer;
 import existingCustomer.ExistingCustomer;
+import frames.JFrameClass;
 import newCustomer.NewCustomer;
-
-
 
 public class Menu extends JFrame {
 
@@ -28,15 +25,14 @@ public class Menu extends JFrame {
 	private JFrame f;
 
 	public void menuStart() {
-
-		f = new JFrame("User Type");
-		f.setSize(400, 300);
-		f.setLocation(200, 200);
-		exit();
+		
+		JFrameClass jFrameClass = new JFrameClass();
+		f = jFrameClass.createJFrame("User Type",400,300,200,200);
 
 		JPanel userTypePanel = new JPanel();
 		ButtonGroup userType = new ButtonGroup();
 		JRadioButton radioButton;
+		
 		userTypePanel.add(radioButton = new JRadioButton("Existing Customer"));
 		radioButton.setActionCommand("Customer");
 		userType.add(radioButton);
@@ -61,14 +57,15 @@ public class Menu extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				String user = userType.getSelection().getActionCommand();
-				if (user.equals("New Customer")) {
+				switch(user){
+				case "New Customer":
 					NewCustomer newCustomer = new NewCustomer();
 					newCustomer.newCust(customerList);
 					setCustomerList(newCustomer.getListOfTheCustomers());
-				} else if (user.equals("Administrator")) {
+				case "Administrator":
 					AdministratorLogin admin = new AdministratorLogin();
 					admin.administratorLogin(customerList);
-				} else if (user.equals("Customer")) {
+				case "Customer":
 					ExistingCustomer exitingCustomerClass = new ExistingCustomer();
 					exitingCustomerClass.existingCustomer(customerList);
 				}
@@ -77,13 +74,7 @@ public class Menu extends JFrame {
 		f.setVisible(true);
 	}
 
-	public void exit() {
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
-		});
-	}
+
 
 	public ArrayList<Customer> getCustomerList() {
 		System.out.println("In the get");
@@ -94,11 +85,4 @@ public class Menu extends JFrame {
 		this.customerList = customerList;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 }

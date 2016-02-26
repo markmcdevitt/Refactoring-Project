@@ -1,4 +1,5 @@
 package newCustomer;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import entity.Customer;
+import frames.JFrameClass;
 
 public class NewCustomer {
 
@@ -26,20 +28,12 @@ public class NewCustomer {
 	private JButton add;
 	private String PPS, firstName, surname, dateOfBirth;
 
-	public ArrayList<Customer> getListOfTheCustomers() {
-		return listOfTheCustomers;
-	}
-
-	public void setListOfTheCustomers(ArrayList<Customer> listOfTheCustomers) {
-		this.listOfTheCustomers = listOfTheCustomers;
-	}
-
 	public void newCust(ArrayList<Customer> listOfTheCustomers) {
 
-		f1 = new JFrame("Create New Customer");
-		f1.setSize(400, 300);
-		f1.setLocation(200, 200);
+		JFrameClass jFrameClass = new JFrameClass();
+		f1 = jFrameClass.createJFrame("Create New Customer", 400, 300, 200, 200);
 		this.listOfTheCustomers = listOfTheCustomers;
+
 		Container content = f1.getContentPane();
 		content.setLayout(new BorderLayout());
 
@@ -94,6 +88,14 @@ public class NewCustomer {
 		content.add(panel, BorderLayout.CENTER);
 		content.add(panel2, BorderLayout.SOUTH);
 		f1.setVisible(true);
+	}
+
+	public ArrayList<Customer> getListOfTheCustomers() {
+		return listOfTheCustomers;
+	}
+
+	public void setListOfTheCustomers(ArrayList<Customer> listOfTheCustomers) {
+		this.listOfTheCustomers = listOfTheCustomers;
 	}
 
 }

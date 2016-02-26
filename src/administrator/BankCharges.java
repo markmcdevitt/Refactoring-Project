@@ -71,7 +71,6 @@ public class BankCharges {
 				JOptionPane.showMessageDialog(f,
 						"This customer has no accounts! \n The admin must add acounts to this customer.", "Oops!",
 						JOptionPane.INFORMATION_MESSAGE);
-				f.dispose();
 			} else {
 				for (int i = 0; i < customer2.getAccounts().size(); i++) {
 					if (customer2.getAccounts().get(i).getNumber() == box.getSelectedItem()) {

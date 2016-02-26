@@ -1,4 +1,5 @@
 package newCustomer;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -7,10 +8,11 @@ import javax.swing.JOptionPane;
 import entity.Customer;
 import entity.CustomerAccount;
 
-public class AddCustomerDetails {	
+public class AddCustomerDetails {
 
 	private JFrame f;
-	public Customer addDetails(String pPS, String firstName, String surname, String dateOfBirth,JFrame oldFrame) {
+
+	public Customer addDetails(String pPS, String firstName, String surname, String dateOfBirth, JFrame oldFrame) {
 		Customer customer = new Customer();
 		oldFrame.dispose();
 		String CustomerID = "ID" + pPS;

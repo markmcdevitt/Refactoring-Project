@@ -19,7 +19,7 @@ public class BalanceUpdate {
 		this.acc = acc;
 		this.amount = amount;
 
-		String euro = "€";
+		String euro = " € ";
 		if (type.equals("withdraw")) {
 			acc.setBalance(acc.getBalance() - amount);
 		} else if (type.equals("lodgement")) {

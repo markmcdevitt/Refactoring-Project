@@ -139,8 +139,8 @@ public class Navigate {
 		try {
 			firstNameTextField.setText(listOfTheCustomers.get(position).getFirstName());
 			surnameTextField.setText(listOfTheCustomers.get(position).getSurname());
-			pPSTextField.setText(listOfTheCustomers.get(position).getPPS());
-			dOBTextField.setText(listOfTheCustomers.get(position).getDOB());
+			pPSTextField.setText(listOfTheCustomers.get(position).getPps());
+			dOBTextField.setText(listOfTheCustomers.get(position).getDateOfBirth());
 			customerIDTextField.setText(listOfTheCustomers.get(position).getCustomerID());
 			passwordTextField.setText(listOfTheCustomers.get(position).getPassword());
 			return true;
