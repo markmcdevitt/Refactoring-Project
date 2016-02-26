@@ -29,8 +29,6 @@ public class DeleteAccount {
 		boolean found = true;
 		boolean loop = true;
 		
-		
-
 		this.listOfTheCustomers = listOfTheCustomers;
 		{
 			Object customerID = JOptionPane.showInputDialog(f,

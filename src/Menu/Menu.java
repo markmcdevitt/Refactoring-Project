@@ -1,4 +1,5 @@
 package Menu;
+
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,14 +26,14 @@ public class Menu extends JFrame {
 	private JFrame f;
 
 	public void menuStart() {
-		
+
 		JFrameClass jFrameClass = new JFrameClass();
-		f = jFrameClass.createJFrame("User Type",400,300,200,200);
+		f = jFrameClass.createJFrame("User Type", 400, 300, 200, 200);
 
 		JPanel userTypePanel = new JPanel();
 		ButtonGroup userType = new ButtonGroup();
 		JRadioButton radioButton;
-		
+
 		userTypePanel.add(radioButton = new JRadioButton("Existing Customer"));
 		radioButton.setActionCommand("Customer");
 		userType.add(radioButton);
@@ -57,15 +58,14 @@ public class Menu extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				String user = userType.getSelection().getActionCommand();
-				switch(user){
-				case "New Customer":
+				if (user.equals("New Customer")) {
 					NewCustomer newCustomer = new NewCustomer();
 					newCustomer.newCust(customerList);
 					setCustomerList(newCustomer.getListOfTheCustomers());
-				case "Administrator":
+				} else if (user.equals("Administrator")) {
 					AdministratorLogin admin = new AdministratorLogin();
 					admin.administratorLogin(customerList);
-				case "Customer":
+				} else if (user.equals("Customer")) {
 					ExistingCustomer exitingCustomerClass = new ExistingCustomer();
 					exitingCustomerClass.existingCustomer(customerList);
 				}
@@ -73,8 +73,6 @@ public class Menu extends JFrame {
 		});
 		f.setVisible(true);
 	}
-
-
 
 	public ArrayList<Customer> getCustomerList() {
 		System.out.println("In the get");
@@ -85,4 +83,11 @@ public class Menu extends JFrame {
 		this.customerList = customerList;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 }
